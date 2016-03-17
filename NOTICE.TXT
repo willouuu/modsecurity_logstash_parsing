@@ -1,1 +1,1 @@
-Installation :
+Fonctionne avec LogStash 2.2

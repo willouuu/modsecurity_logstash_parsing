@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = 'modsecurity_parsing'
+  s.name = 'custom_modsec'
   s.version = '0.1.0'
   s.licenses = ['Apache License (2.0)']
   s.summary = "Recupération des types de tentatives d'attaques."

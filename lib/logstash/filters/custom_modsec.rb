@@ -6,7 +6,7 @@ require "logstash/namespace"
 class LogStash::Filters::Custom_modsec < LogStash::Filters::Base
   config_name "custom_modsec"
   #milestone 1
-  
+
 
   config :message, :validate => :string, :default => "Default value"
 
@@ -55,7 +55,7 @@ class LogStash::Filters::Custom_modsec < LogStash::Filters::Base
              end
          end
 
-         if !event.to_hash['ResultH'].nil? 
+         if !event.to_hash['ResultH'].nil?
             trailer_array = event.to_hash['ResultH'].split(/\n/)
             trailer_array.each do |entry|
             if entry.match(/^Message: /)
@@ -69,17 +69,17 @@ class LogStash::Filters::Custom_modsec < LogStash::Filters::Base
                extractVal(/\[data \"(.*?)\"\]/, entry, msg, 'data')
                extractVal(/\[tag \"(.*?)\"\]/, entry, msg, 'tag')
                e =  LogStash::Event.new("@version" => "1",
-                                        "@timestamp" => event["timestamp"], 
-                                        "info" => msg['info'], 
-                                        "file" => msg['file'], 
-                                        "line" => msg['line'], 
-                                        "id" => msg['id'], 
-                                        "msg" => msg['msg'], 
-                                        "severity" => msg['severity'], 
-                                        "data" => msg['data'], 
+                                        "@timestamp" => event["timestamp"],
+                                        "info" => msg['info'],
+                                        "file" => msg['file'],
+                                        "line" => msg['line'],
+                                        "id" => msg['id'],
+                                        "msg" => msg['msg'],
+                                        "severity" => msg['severity'],
+                                        "data" => msg['data'],
                                         "tag" => msg['tag'],
-                                       
-                                        
+
+
                                         "input_type" => "log",
                                         "source" => "/var/log/httpd/modsec_audit.log",
                                         "type" => "mod_security"
@@ -91,7 +91,7 @@ class LogStash::Filters::Custom_modsec < LogStash::Filters::Base
           end
      #filter_matched(event)
      end; end
-     
+
      rescue Exception => e
          @logger.error("Ruby exception occurred: #{e}")
          event.tag("_rubyexception")
@@ -100,4 +100,3 @@ class LogStash::Filters::Custom_modsec < LogStash::Filters::Base
 
   end
 end
-

@@ -1,27 +1,31 @@
 # modsecurity_logstash_parsing
 Recupération des types de tentatives d'attaques de ModSecurity pour ELK ( Elastic Search, LogStash, Kibana )
 
+====================
 
 
-# Installation rvm:
+### Installation rvm:
+```
   curl -sSL https://get.rvm.io | bash -s stable
   rvm use jruby
   gem install jruby
   gem install logstash-devutils
   bundle install
+```
 
 
-
-# Installation Plugin
+### Installation Plugin
+```
 git clone https://github.com/willouuu/modsecurity_logstash_parsing.git
 cd modsecurity_logstash_parsing/
 gem build custom-modsec.gemspec
 cd /opt/logstash/
 bin/plugin install ~/modsecurity_logstash_parsing/custom_modsec-0.1.0.gem
 bin/logstash -e 'input { stdin{} } filter { custom_modsec {} } output {stdout { codec => rubydebug }}'
+```
 
-
-# Configuration filebeat :
+### Configuration filebeat :
+```
 filebeat:
   prospectors:
     -
@@ -45,11 +49,12 @@ output:
 shipper:
 logging:
   files:
+```
 
 
 
-
-# Configuration logstash :
+### Configuration logstash :
+```
 input {
   beats {
     port => 5044
@@ -85,11 +90,14 @@ output {
     document_type => "%{[@metadata][type]}"
   }
 }
+```
 
-# Lancement logstash debug
+### Lancement logstash debug
+```
   /opt/logstash/bin/logstash -f /etc/logstash/conf.d/01-apache_modsec.conf -v --debug --verbose -w 1
   -w 1 : nombre de worker à 1 pour le multiline
+  ```
 
 
-# Sources
+### Sources
 Merci à bitsofinfo pour la partie extraction : https://github.com/bitsofinfo/logstash-modsecurity

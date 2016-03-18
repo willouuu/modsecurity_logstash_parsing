@@ -86,7 +86,7 @@ output {
     hosts => ["localhost:9200"]
     sniffing => true
     manage_template => false
-    index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
+    index => "%{type}-%{+YYYY.MM.dd}"
     document_type => "%{[@metadata][type]}"
   }
 }
@@ -96,7 +96,11 @@ output {
 ```
   /opt/logstash/bin/logstash -f /etc/logstash/conf.d/01-apache_modsec.conf -v --debug --verbose -w 1
   -w 1 : nombre de worker à 1 pour le multiline
-  ```
+```
+
+
+### Index Kibana
+Ajouter un index à kibana : mod_security-*
 
 
 ### Sources

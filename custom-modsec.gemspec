@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.summary = "Recupération des types de tentatives d'attaques."
   s.description = "Basé sur le fonctionnement de https://github.com/bitsofinfo/logstash-modsecurity/"
   s.authors = ["William VINCENT"]
-  s.email = 'contact@adminwiki.fr'
+  s.email = 'contact -a@t- adminwiki.fr'
   s.homepage = "http://www.adminwiki.fr"
   s.require_paths = ["lib"]
 
